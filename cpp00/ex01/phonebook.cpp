@@ -1,40 +1,66 @@
 
+#include <string>
 #include <iostream>
 
-class PhoneBook
-{
+class Contact {
 	private:
+	std::string fName, lName, nickname, phoneNumber, darkSercret;
 
 	public:
-
-	void subscribe() {
-		std::cout << "Subscribe this channel\n";
+	// set
+	void setFName(std::string& fName) {
+		this->fName = fName;
+	}
+	void setLName(std::string& lName) {
+		this->lName = lName;
+	}
+	void setNickname(std::string& nickname) {
+		this->nickname = nickname;
+	}
+	void setPhoneNumber(std::string& phoneNumber) {
+		this->phoneNumber = phoneNumber;
+	}
+	void setDarkSecret(std::string& darkSecret) {
+		this->darkSercret = darkSecret;
 	}
 
-	void like() {
-		std::cout << "Like this video and activate the bell\n";
+	//get
+	std::string getFName(void) {
+		return fName;
+	}
+	std::string getLName(void) {
+		return lName;
+	}
+	std::string getNickname(void) {
+		return nickname;
+	}
+	std::string getPhoneNumber(void) {
+		return phoneNumber;
+	}
+	std::string getDarkSecret(void) {
+		return darkSercret;
 	}
 };
 
-class Car {
-	private:
-	int	year;
-	float amount, km;
+// class PhoneBook
+// {
+// 	private:
 
-	public:
-	void SetYear(int year) {
-		this->year = year;
-	}
-	int	GetYear(void) {
-		return year;
-	}
-};
+// 	public:
+// 	static int index;
+// };
+
 
 int	main(void)
 {
-	PhoneBook channel;
+	// PhoneBook::index = 1;
+	
+	Contact	First;
 
-	channel.subscribe();
-	channel.like();
+	std::string fName;
+
+	fName = "Adriano";
+	First.setFName(fName);
+	std::cout << First.getFName() << std::endl;
 	return (0);
 }
