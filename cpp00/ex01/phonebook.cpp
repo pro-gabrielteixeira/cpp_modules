@@ -79,7 +79,44 @@ class PhoneBook
 		}
 };
 
+std::string handleView(std::string str) {
+	int	i;
+
+	if (str.length() > 10) {
+		str.replace(9, 1, ".");
+		str.erase(10, (str.length() - 10));
+	}
+	else if (str.length() < 10) {
+		i = 10 - str.length();
+		while (i-- > 0)
+			str.insert(0, " ");
+	}
+	return str;
+}
+
 void	searchContacts(PhoneBook& phonebook) {
+	char str[256];
+
+	std::cout << "     INDEX|FIRST NAME| LAST NAME|  NICKNAME" << std::endl;
+	for (int j = 0; j < 8; j++) {
+		std::cout << "         " << j + 1 << "|" << handleView(phonebook.getFName(j)) << "|" << handleView(phonebook.getLName(j))
+		<< "|" << handleView(phonebook.getNickname(j)) << std::endl;
+	}
+	std::cout << "TYPE THE CONTACT INDEX FOR MORE INFORMATION\n> ";
+	std::fgets(str, 256, stdin);
+	if (std::atoi(str) > 0 && std::atoi(str) < 9) {
+		if (phonebook.getFName(std::atoi(str) - 1) == "")
+			std::cout << "EMPTY CONTACT" << phonebook.getFName(std::atoi(str) - 1) << std::endl;
+		else {
+		std::cout << "First Name: " << phonebook.getFName(std::atoi(str) - 1) << std::endl;
+		std::cout << "Last Name: " << phonebook.getLName(std::atoi(str) - 1) << std::endl;
+		std::cout << "Nickname: " << phonebook.getNickname(std::atoi(str) - 1) << std::endl;
+		std::cout << "Phone Number: " << phonebook.getPhoneNumber(std::atoi(str) - 1) << std::endl;
+		std::cout << "Dark Secret: " << phonebook.getDarkSecret(std::atoi(str) - 1) << std::endl;
+		}
+	}
+	else
+		std::cout << ">>> INVALID COMMAND <<<" << std::endl;
 
 }
 
@@ -118,8 +155,7 @@ int	main(void) {
 
 	index = 0;
 	while (true) {
-		if (index == 8)
-			index = 0;
+		index = index % 8;
 		std::cout << "TYPE: ADD/SEARCH/EXIT\n> ";
 		std::getline(std::cin, str);
 		if (str == "ADD") {
@@ -131,14 +167,7 @@ int	main(void) {
 		else if (str == "EXIT")
 			break;
 		else
-			std::cout << " >>> Write ADD/SEARCH/EXIT command <<<" << std::endl;
-	}
-	for (int j = 0; j < 8; j++) {
-		std::cout << "FName: " << phonebook.getFName(j) << std::endl;
-		std::cout << "LName: " << phonebook.getLName(j) << std::endl;
-		std::cout << "Nickname: " << phonebook.getNickname(j) << std::endl;
-		std::cout << "PhoneNumber: " << phonebook.getPhoneNumber(j) << std::endl;
-		std::cout << "DarkSecret: " << phonebook.getDarkSecret(j) << std::endl;
+			std::cout << ">>> INVALID COMMAND <<<" << std::endl;
 	}
 	return (0);
 }
