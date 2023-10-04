@@ -6,9 +6,9 @@ NAME		=	zombie
 
 OBJ			=	$(patsubst src%, obj%, $(SRC:.cpp=.o))
 
-SRC			=	source/main.cpp \
-				source/Zombie.cpp \
-				source/zombieHorde.cpp
+SRC			=	src/main.cpp \
+				src/Zombie.cpp \
+				src/zombieHorde.cpp
 
 CC			=	c++
 
@@ -24,7 +24,7 @@ $(NAME):	$(OBJ)
 obj:
 			@mkdir -p obj
 
-obj/%.o:	%.cpp
+obj/%.o:	src/%.cpp
 			@$(CC) $(FLAGS) -o $@ -c $<
 			@echo "$@ $(GREEN)created$(RESET)"
 

@@ -2,20 +2,18 @@ GREEN		= 	\033[0;32m
 RED			= 	\033[0;31m
 RESET		= 	\033[0m
 
-NAME		=	zombie
+NAME		=	ex03
 
 OBJ			=	$(patsubst src%, obj%, $(SRC:.cpp=.o))
 
 SRC			=	src/main.cpp \
-				src/Zombie.cpp \
-				src/newZombie.cpp \
-				src/randomChump.cpp 
+				src/Weapon.cpp \
+				src/HumanA.cpp \
+				src/HumanB.cpp \
 
 CC			=	c++
 
-HEADER		=	./includes
-
-FLAGS		= -I${HEADER} -Wall -Wextra -Werror -std=c++98
+FLAGS		=	-Wall -Wextra -Werror -std=c++98
 
 all:		obj $(NAME)
 
@@ -30,7 +28,7 @@ obj/%.o:	src/%.cpp
 			@echo "$@ $(GREEN)created$(RESET)"
 
 valgrind:	all
-	valgrind --leak-check=full --show-leak-kinds=all ./zombie
+	valgrind --leak-check=full --show-leak-kinds=all ./ex03
 
 clean:
 			@rm -rf $(OBJ) obj
