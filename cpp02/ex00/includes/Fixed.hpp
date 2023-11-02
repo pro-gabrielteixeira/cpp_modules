@@ -6,11 +6,12 @@
 class Fixed
 {
 private:
-	/* data */
+	int *fixedPoint;
+	static const int literalNumber = 8;
 public:
-	Fixed(/* args */);
+	Fixed();
+	Fixed(const Fixed& fixedCopy);
 	~Fixed();
 };
-
 
 #endif
